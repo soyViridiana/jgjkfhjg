@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <title>REGISTRO DE ARTISTA</title>
+</head>
+<body onload="cargarClientes();checarSesion();">
+
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="inicio.html">
+        <img src="img/music2.jpg" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+        CONTACTOS
+      </a>
+        <a class="navbar-brand" href="clientes.html">
+          CLIENTES
+        </a>
+        <a class="navbar-brand" href="auto.html">
+          AUTOS
+        </a>
+  
+        
+
+      <div class="d-flex" role="search">
+        <div class="dropdown">
+          <button class="btn btn-dark dropdown-toggle" id="usuario" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          
+          </button>
+          <ul class="dropdown-menu">
+            <li><button class="dropdown-item" onclick="cerrarSesion()"><i class="bi bi-box-arrow-right p-1"></i>Cerrar Sesion</button></li>
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+  </nav>
+
+
+
+  <div class="card text-center m-4">
+    <div class="card-header">
+      CRUD CLIENTES
+    </div>
+    <div class="card-body">
+      <div class="text-end">
+        <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#agregarModal"> <i class="bi bi-person-add"></i> Agregar Artista</button>
+
+
+      </div>
+      <table class="table table-hover table-responsive>
+        <thead class="table-dark">
+          <tr>
+            <td>Nombre del Artista</td>
+            <td>Nombre del Album</td>
+            <td>Discos Disponibles</td>
+            <td>Precio</td>
+            <td>Genero</td>
+            <td>Editar</td>
+            <td>Eliminar</td>
+          </tr>
+        </thead>
+        <tbody id="registros">
+          
+        </tbody>
+      </table>
+
+
+    </div>
+    <div class="card-footer text-body-secondary">
+      Desing by Viridiana Morales 2023
+    </div>
+  </div>
+
+
+<!-- Modal AGREGAR ARTISTA-->
+<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">AGREGAR ARTISTA</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formAgregar">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre del Artista</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Nombre del Artista">
+          </div>
+
+          <div class="mb-3">
+            <label for="album" class="form-label">Nombre del Album</label>
+            <input type="text" class="form-control" id="album" placeholder="Nombre del Album">
+          </div>
+
+          <div class="mb-3">
+            <label for="discos" class="form-label">Discos Disponibles</label>
+            <input type="text" class="form-control" id="disco" placeholder="Discos Disponibles">
+          </div> -->
+
+          <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="" class="form-control" id="precio" placeholder="Telefono">
+          </div>
+
+          <div class="mb-3">
+            <label for="municipio" class="form-label">Municipio</label>
+            <input type="text" class="form-control" id="municipio" placeholder="Ingresa tu municipio">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x-circle p-1"></i>Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="agregarCliente()"><i class="bi bi-download p-1"></i>Guardar</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal EDITAR CONTACTO-->
+<div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">EDITAR CONTACTO</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formEditar">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="enombre" placeholder="Nombre">
+          </div>
+
+          <div class="mb-3">
+            <label for="tel" class="form-label">Telefono</label>
+            <input type="tel" class="form-control" id="etelefono" placeholder="Telefono">
+          </div>
+
+          <div class="mb-3">
+            <label for="municipio" class="form-label">Municipio</label>
+            <input type="text" class="form-control" id="emunicipio" placeholder="municipio">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" id="clienteid">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x-circle p-1"></i>Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="editarCliente()"><i class="bi bi-download p-1"></i>Guardar</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.18/dist/sweetalert2.all.min.js"></script>
+     <script src="js/clienteCRUD.js"></script>
+</body>
+</html>
